@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PC Upgrade Store</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+     .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 15px 30px;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo a {
+    color: #f44336;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+
+  .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links li a:hover {
+    color: #f44336;
+  }
+
+  .cart-login a {
+    margin-left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .cart-login a:hover {
+    color: #f44336;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    transition: all 0.3s;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      position: absolute;
+      top: 65px;
+      left: 0;
+      width: 100%;
+      background-color: #111;
+      flex-direction: column;
+      align-items: center;
+      display: none;
+      gap: 15px;
+      padding: 15px 0;
+    }
+
+    .nav-links.active {
+      display: flex;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .cart-login {
+      display: none; /* optional for mobile */
+    }
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hamburger animation when active */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+    /* Landing Section */
+    .landing {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: url("https://rog.asus.com/media/1644549597584.jpg") center/cover no-repeat;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #0ff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    }
+
+    .card img {
+      width: 100%;
+      height: fit-content;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    /* Suggestions Box */
+    .suggestions-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 20, 20, 0.95);
+      border: 2px solid #0ff;
+      padding: 15px 25px;
+      border-radius: 10px;
+      max-width: 600px;
+      color: #0ff;
+      font-size: 1rem;
+      display: none;
+      animation: fadeIn 0.5s ease;
+      z-index: 1000;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">
+    <a href="#">PCStore</a>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#custom-builds">Custom Builds</a></li>
+    <li><a href="#offers">Offers</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="/ai.html">Ai Builder</a></li>
+  </ul>
+  <div class="cart-login">
+    <a href="#cart">🛒 Cart</a>
+    <a href="#login">Login</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+  <!-- Landing -->
+  <section class="landing"></section>
+
+  <!-- Motherboards -->
+  <section id="motherboards">
+    <h2>Motherboards</h2>
+    <div class="grid">
+      <div class="card" data-type="motherboard">
+        <img src="https://dlcdnwebimgs.asus.com/gain/BE083FFC-11E2-4BBC-A4FB-18C5C5880C1A/w717/h525" alt="ROG Motherboard">
+        <h3>ROG MAXIMUS Z890 EXTREME</h3>
+        <p>Ready for Advanced AI PCs: Designed for the future of AI computing, with the power and connectivity needed for demanding AI applications</p>
+      </div>
+      <div class="card" data-type="motherboard">
+        <img src="https://asset.msi.com/resize/image/global/product/product_17325902886dad282b84b19a9aed152ef9794764f9.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png" alt="MSI Motherboard">
+        <h3>MSI MEG X870E GODLIKE</h3>
+        <p> best for high-end gaming and demanding applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Processors -->
+  <section id="processors">
+    <h2>Processors</h2>
+    <div class="grid">
+      <div class="card" data-type="cpu">
+        <img src="https://sclgaming.in/wp-content/uploads/2024/12/Intel-Core-i9-14900KF-14th-Gen-Desktop-Processor-1-1.webp" alt="Intel i9">
+        <h3>Intel Core i9-14900K</h3>
+        <p>24 cores, 32 threads – ultimate performance for gaming & work.</p>
+      </div>
+      <div class="card" data-type="cpu">
+        <img src="https://m.media-amazon.com/images/I/5116zdA9uyL.jpg" alt="AMD Ryzen">
+        <h3>AMD Ryzen 9 7950X</h3>
+        <p>16 cores, 32 threads – best for creators and gamers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Power Supplies -->
+  <section id="psu">
+    <h2>Power Supplies</h2>
+    <div class="grid">
+      <div class="card" data-type="psu">
+        <img src="https://smart1ech.com/wp-content/uploads/2024/12/632809_225185_04_package_comping.jpg" alt="Corsair PSU">
+        <h3>Corsair RM1000x</h3>
+        <p>1000W Gold certified, fully modular, ultra silent.</p>
+      </div>
+      <div class="card" data-type="psu">
+        <img src="https://m.media-amazon.com/images/I/81x1V41CY-L.jpg" alt="Cooler Master PSU">
+        <h3>Cooler Master XG Plus 850</h3>
+        <p>ARGB Display, high efficiency, reliable for gaming rigs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cabinets -->
+  <section id="cases">
+    <h2>PC Cabinets</h2>
+    <div class="grid">
+      <div class="card" data-type="case">
+        <img src="https://lian-li.com/wp-content/uploads/2021/12/o11d_evo-006.jpg" alt="Lian Li Case">
+        <h3>Lian Li O11 Dynamic EVO</h3>
+        <p>Premium mid-tower, tempered glass, RGB ready.</p>
+      </div>
+      <div class="card" data-type="case">
+        <img src="https://m.media-amazon.com/images/I/61hC6R08S+L.jpg" alt="Cooler Master Case">
+        <h3>Cooler Master HAF 700</h3>
+        <p>Massive airflow, modular design, E-ATX ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 PC Upgrade Store. Built for gamers.</p>
+  </footer>
+
+  <!-- Suggestions Box -->
+  <div class="suggestions-box" id="suggestionsBox"></div>
+
+  <script>
+   const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
+
+    const suggestions = {
+      motherboard: [
+        "Best paired with: Intel Core i9 or AMD Ryzen 9",
+        "Add a 1000W PSU for stability",
+        "Recommended cases: Lian Li O11, Cooler Master HAF 700"
+      ],
+      cpu: [
+        "Pair with a compatible motherboard (Z790 or X670E)",
+        "Use high-performance cooling solutions",
+        "Add a modular PSU for better airflow"
+      ],
+      psu: [
+        "Choose PSU wattage based on your GPU & CPU",
+        "Modular PSUs make cable management easy",
+        "Works great with RGB cabinets"
+      ],
+      case: [
+        "Ensure clearance for GPU & AIO cooler",
+        "Supports cable management with modular PSUs",
+        "Pair with tempered glass side panels for aesthetics"
+      ]
+    };
+
+    const suggestionBox = document.getElementById("suggestionsBox");
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      card.addEventListener("mouseenter", () => {
+        const type = card.dataset.type;
+        if (suggestions[type]) {
+          suggestionBox.innerHTML = "<strong>AI Suggestions:</strong><br> - " + suggestions[type].join("<br> - ");
+          suggestionBox.style.display = "block";
+        }
+      });
+      card.addEventListener("mouseleave", () => {
+        suggestionBox.style.display = "none";
+      });
+    });
+  </script>
+</body>
+</html>

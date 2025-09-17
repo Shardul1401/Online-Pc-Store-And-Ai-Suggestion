@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>AI PC Builder & Compatibility</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+     body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+     .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 15px 30px;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo a {
+    color: #f44336;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+
+  .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links li a:hover {
+    color: #f44336;
+  }
+
+  .cart-login a {
+    margin-left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .cart-login a:hover {
+    color: #f44336;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    transition: all 0.3s;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      position: absolute;
+      top: 65px;
+      left: 0;
+      width: 100%;
+      background-color: #111;
+      flex-direction: column;
+      align-items: center;
+      display: none;
+      gap: 15px;
+      padding: 15px 0;
+    }
+
+    .nav-links.active {
+      display: flex;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .cart-login {
+      display: none; /* optional for mobile */
+    }
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hamburger animation when active */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+    :root {
+      --accent: #f44336;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: system-ui, Arial;
+      margin: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #111;
+      padding: 14px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .4);
+      z-index: 10;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: .3px;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    section {
+      background: #151515;
+      border: 1px solid #262626;
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* 🔹 Responsive Fixes */
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      #setup,
+      #cooling,
+      #case {
+        width: 100%;
+        margin-left: 0;
+      }
+      main {
+        padding: 10px;
+      }
+      section {
+        padding: 14px;
+      }
+    }
+
+    label {
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #2d2d2d;
+      background: #101010;
+      color: #fff;
+      outline: none;
+    }
+
+    select:hover,
+    input:hover,
+    textarea:hover {
+      box-shadow: 0 0 10px var(--accent, .6);
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      box-shadow: 0 0 12px rgba(244, 67, 54, .4);
+    }
+
+    button:hover {
+      filter: brightness(1.07);
+    }
+
+    .result {
+      background: #0f0f0f;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: bolder;
+      font-size: 15px;
+    }
+
+    .muted {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .loading {
+      opacity: .75;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 0;
+    }
+    #cooling{
+      width: 95%;
+    }
+    #case {
+      width: 95%;
+    }
+    #setup {
+      overflow: auto;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    /* Scrollbar styles */
+    #setup::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #setup::-webkit-scrollbar-track {
+      background: #1e1e1e;
+      border-radius: 8px;
+    }
+
+    #setup::-webkit-scrollbar-thumb {
+      background: #ff4b5c;
+      border-radius: 8px;
+    }
+
+    #setup::-webkit-scrollbar-thumb:hover {
+      background: #ff6b7c;
+    }
+
+    #setup {
+      scrollbar-color: #ff4b5c #1e1e1e;
+      scrollbar-width: thin;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+  <div class="logo">
+    <a href="#">PCStore</a>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#custom-builds">Custom Builds</a></li>
+    <li><a href="#offers">Offers</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="/ai.html">Ai Builder</a></li>
+  </ul>
+  <div class="cart-login">
+    <a href="#cart">🛒 Cart</a>
+    <a href="#login">Login</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+  <header>
+    <h1>🖥️ AI PC Builder & Compatibility</h1>
+  </header>
+
+  <main>
+    <!-- SECTION 1: AI PC BUILDER -->
+    <section>
+      <h2>⚡ AI PC Builder</h2>
+      <p class="muted">Pick what you know, leave the rest blank. Gemini will fill the gaps and suggest a full,
+        compatible build.</p>
+      <div class="grid">
+        <div><label for="mb">Motherboard</label>
+          <select id="mb">
+            <option value="">— Select —</option>
+            <option>ASUS ROG Strix B550</option>
+            <option>MSI Z790-A Pro</option>
+            <option>Gigabyte B650 Aorus Elite</option>
+            <option>ASRock B760M Pro RS</option>
+          </select>
+        </div>
+        <div><label for="cpu">CPU</label>
+          <select id="cpu" title="CPU">
+            <option value="">— Select —</option>
+            <option>Ryzen 5 5600X</option>
+            <option>Ryzen 7 7800X3D</option>
+            <option>Intel Core i5-13600K</option>
+            <option>Intel Core i7-13700K</option>
+          </select>
+        </div>
+        <div><label for="gpu">GPU</label>
+          <select id="gpu" title="GPU" aria-label="GPU">
+            <option value="">— Select —</option>
+            <option>NVIDIA RTX 3060</option>
+            <option>NVIDIA RTX 4070</option>
+            <option>AMD RX 6700 XT</option>
+            <option>AMD RX 7800 XT</option>
+          </select>
+        </div>
+        <div><label for="psu">PSU</label>
+          <select id="psu">
+            <option value="">— Select —</option>
+            <option>650W Gold</option>
+            <option>750W Gold</option>
+            <option>850W Gold</option>
+          </select>
+        </div>
+        <div><label for="ram">RAM</label>
+          <select id="ram" title="RAM">
+            <option value="">— Select —</option>
+            <option>16GB DDR4 3200</option>
+            <option>32GB DDR4 3600</option>
+            <option>32GB DDR5 5600</option>
+            <option>64GB DDR5 6000</option>
+          </select>
+        </div>
+        <div><label>Storage</label>
+          <select id="storage" title="Storage" aria-label="Storage">
+            <option value="">— Select —</option>
+            <option>1TB NVMe</option>
+            <option>2TB NVMe</option>
+            <option>2TB SATA SSD</option>
+          </select>
+        </div>
+        <div><label>Cooling</label><input id="cooling" placeholder="Air / 240mm AIO / 360mm AIO" /></div>
+        <div><label>Case</label><input id="case" placeholder="Mid Tower / Full Tower" /></div>
+      </div>
+
+      <div class="row">
+        <button id="btnSuggest">Get AI Suggestions</button>
+        <span id="s1Status" class="muted"></span>
+      </div>
+      <div id="s1Result" class="result" hidden></div>
+    </section>
+
+    <!-- SECTION 2: AI COMPATIBILITY CHECK -->
+    <section>
+      <h2>🔍 AI Compatibility Check / Ask About My Setup</h2>
+      <p class="muted">Paste your current build or just the motherboard. We’ll suggest compatible upgrades.</p>
+      <textarea id="setup" rows="5" placeholder="Example:
+Motherboard: ASUS ROG B550
+CPU: Ryzen 5 5600X
+GPU: RTX 3060
+RAM: 16GB DDR4 3200
+PSU: 650W Gold
+Storage: 1TB NVMe
+"></textarea>
+      <div class="row">
+        <button id="btnCompat">Check Compatibility</button>
+        <span id="s2Status" class="muted"></span>
+      </div>
+      <div id="s2Result" class="result" hidden></div>
+    </section>
+  </main>
+
+  <script src="ai.js"></script>
+</body>
+
+</html>
